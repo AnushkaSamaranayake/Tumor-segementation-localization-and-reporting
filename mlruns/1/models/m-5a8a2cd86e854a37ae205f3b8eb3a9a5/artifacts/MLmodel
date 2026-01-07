@@ -1,0 +1,23 @@
+artifact_path: /home/anushka/brain_tumor_segementation/Tumor-segementation-localization-and-reporting/mlruns/1/models/m-5a8a2cd86e854a37ae205f3b8eb3a9a5/artifacts
+flavors:
+  python_function:
+    config:
+      device: null
+    data: data
+    env:
+      conda: conda.yaml
+      virtualenv: python_env.yaml
+    loader_module: mlflow.pytorch
+    pickle_module_name: mlflow.pytorch.pickle_module
+    python_version: 3.12.12
+  pytorch:
+    code: null
+    model_data: data
+    pytorch_version: 2.9.1+cu126
+mlflow_version: 3.8.1
+model_id: m-5a8a2cd86e854a37ae205f3b8eb3a9a5
+model_size_bytes: 124163341
+model_uuid: m-5a8a2cd86e854a37ae205f3b8eb3a9a5
+prompts: null
+run_id: 95223a8aa5e64272bd061feded22c82f
+utc_time_created: '2026-01-07 20:30:58.354053'
