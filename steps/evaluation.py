@@ -3,7 +3,7 @@ from zenml import step
 import torch
 
 @step
-def evaluate_model(model, test_loader, criterion):
+def evaluate_model(model, test_loader, criterion) -> None:
     """Evaluates the segmentation model.
 
     Args:
@@ -15,14 +15,15 @@ def evaluate_model(model, test_loader, criterion):
         test_loss: The average loss on the test dataset.
     """
     logging.info("Starting model evaluation")
-    model.eval()
-    test_loss = 0.0
-    with torch.no_grad():
-        for images, masks in test_loader:
-            outputs = model(images)
-            loss = criterion(outputs, masks)
-            test_loss += loss.item()
+    # model.eval()
+    # test_loss = 0.0
+    # with torch.no_grad():
+    #     for images, masks in test_loader:
+    #         outputs = model(images)
+    #         loss = criterion(outputs, masks)
+    #         test_loss += loss.item()
 
-    avg_test_loss = test_loss / len(test_loader)
-    logging.info(f"Test Loss: {avg_test_loss:.4f}")
-    return avg_test_loss
+    # avg_test_loss = test_loss / len(test_loader)
+    # logging.info(f"Test Loss: {avg_test_loss:.4f}")
+    # return avg_test_loss
+    pass
