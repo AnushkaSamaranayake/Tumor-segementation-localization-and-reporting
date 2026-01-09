@@ -5,7 +5,7 @@ import torch
 ## Define the model
 
 @step
-def train_model(model, train_loader, val_loader, criterion, optimizer, num_epochs: int) -> None:
+def train_model(model, train_loader, val_loader, criterion, optimizer, num_epochs) -> None:
     """Trains a segmentation model.
 
     Args:

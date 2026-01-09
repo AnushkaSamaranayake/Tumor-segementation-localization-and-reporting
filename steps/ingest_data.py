@@ -3,6 +3,7 @@ import logging
 from torchvision import transforms
 from PIL import Image
 from torch.utils.data import Dataset, DataLoader, random_split
+from typing import Tuple, Annotated
 import os
 
 # Data Augmentation
@@ -67,7 +68,11 @@ def ingest_data(image_dir: str, mask_dir: str) -> SegmentationDataset:
     return dataset
 
 @step
-def create_data_loaders(dataset: SegmentationDataset):
+def create_data_loaders(dataset: SegmentationDataset) -> Tuple[
+    Annotated[DataLoader, "train_loader"],
+    Annotated[DataLoader, "val_loader"],
+    Annotated[DataLoader, "test_loader"]
+]:
     """Creates training and validation data loaders from the dataset.
 
     Args:

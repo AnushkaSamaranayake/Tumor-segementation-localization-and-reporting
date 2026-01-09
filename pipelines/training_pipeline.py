@@ -4,7 +4,7 @@ from steps.ingest_data import ingest_data, create_data_loaders
 from steps.model_train import train_model
 from steps.evaluation import evaluate_model
 
-@pipeline
+@pipeline(enable_cache=True)
 def train_pipeline(image_dir: str, mask_dir: str):
     """Pipeline for training and evaluating a segmentation model.
 
