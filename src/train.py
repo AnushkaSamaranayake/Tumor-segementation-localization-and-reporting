@@ -1,10 +1,6 @@
 import os
 import torch
-import torch.optim as optim
-import torch.nn as nn
 import mlflow
-from model import UNet
-from data import SegmentationDataset, DataAugmentation, DataLoading
 from evaluate import evaluate
 
 evaluation_metrics = evaluate
@@ -50,7 +46,7 @@ class Trainer:
 
                 if epoch_val_dice > best_dice:
                     best_dice = epoch_val_dice
-                    torch.save(self.model.state_dict(), os.path.join("/home/anushka/brain_tumor_segementation/Tumor-segementation-localization-and-reporting/model","best_model.pth"))
+                    torch.save(self.model.state_dict(), os.path.join("Tumor-segementation-localization-and-reporting/model","best_model.pth"))
 
                 mlflow.log_metric({
                     "train_loss": epoch_train_loss,
