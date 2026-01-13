@@ -1,7 +1,7 @@
 import os
 import torch
 import mlflow
-from evaluate import evaluate
+from .evaluate import evaluate
 
 evaluation_metrics = evaluate
 
