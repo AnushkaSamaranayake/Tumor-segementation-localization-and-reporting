@@ -1,8 +1,7 @@
-from config import PIXEL_SPACING
 import cv2 as cv
 import numpy as np
 
-def tumor_localization(mask: np.ndarray):
+def tumor_localization(mask: np.ndarray, PIXEL_SPACING: float):
 
     tumor_pixels = np.argwhere(mask == 1)
 
