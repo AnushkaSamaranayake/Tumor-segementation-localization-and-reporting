@@ -38,3 +38,4 @@ torch==2.9.1+cu126
 torchvision==0.24.1+cu126
 uvicorn==0.40.0
 uvloop==0.22.1
+opencv-python
