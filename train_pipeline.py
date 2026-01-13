@@ -8,16 +8,16 @@ from src.model import UNet
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
-img_dir = "Tumor-segementation-localization-and-reporting/Data/images"
-mask_dir = "Tumor-segementation-localization-and-reporting/Data/masks"
+img_dir = "Data/images"
+mask_dir = "Data/masks"
 
 data_augmentation = DataAugmentation()
 
 dataset = SegmentationDataset(
     image_dir=img_dir,
     mask_dir=mask_dir,
-    image_transform=data_augmentation.image_transform(),
-    mask_transform=data_augmentation.mask_transform()
+    image_transform=data_augmentation.image_transform,
+    mask_transform=data_augmentation.mask_transform
 )
 
 train_loader, val_loader, test_loader = DataLoading.data_loaders(dataset)
