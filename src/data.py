@@ -49,52 +49,37 @@ class SegmentationDataset(Dataset):
 
         return image, mask
 
+class DataLoading:
 
-def create_dataset(image_dir: str, mask_dir: str) -> SegmentationDataset:
-    """Creates a segmentation dataset.
+    @staticmethod
+    def data_loaders(dataset: SegmentationDataset) -> Tuple[
+        Annotated[DataLoader, "Training DataLoader"],
+        Annotated[DataLoader, "Validation DataLoader"],
+        Annotated[DataLoader, "Test DataLoader"]
+    ]:
+        """Splits the dataset into training, validation, and test sets and creates DataLoaders.
 
-    Args:
-        image_dir (str): Directory containing the input images.
-        mask_dir (str): Directory containing the corresponding masks.
+        Args:
+            dataset (SegmentationDataset): The segmentation dataset.
+        Returns:
+            Tuple[DataLoader, DataLoader, DataLoader]: DataLoaders for training, validation, and test sets.
+        """
 
-    Returns:
-        SegmentationDataset: A dataset object containing preprocessed images and masks.
-    """
-    data_augmentation = DataAugmentation()
-    dataset = SegmentationDataset(
-        image_dir=image_dir,
-        mask_dir=mask_dir,
-        image_transform=data_augmentation.image_transform,
-        mask_transform=data_augmentation.mask_transform
-    )
-    return dataset
+        total_size = len(dataset)
+        train_size = int(0.7 * total_size)
+        val_size = int(0.15 * total_size)
+        test_size = total_size - train_size - val_size
 
-def create_data_loaders(dataset: SegmentationDataset) -> Tuple[
-    Annotated[DataLoader, "Training DataLoader"],
-    Annotated[DataLoader, "Validation DataLoader"],
-    Annotated[DataLoader, "Test DataLoader"]
-]:
-    """Splits the dataset into training, validation, and test sets and creates DataLoaders.
+        train_dataset, val_dataset, test_dataset = random_split(
+            dataset,
+            [train_size, val_size, test_size],
+            generator=torch.Generator().manual_seed(42)
+        )
 
-    Args:
-        dataset (SegmentationDataset): The segmentation dataset.
-    Returns:
-        Tuple[DataLoader, DataLoader, DataLoader]: DataLoaders for training, validation, and test sets.
-    """
+        train_loader = DataLoader(train_dataset, batch_size=16, shuffle=True)
+        val_loader = DataLoader(val_dataset, batch_size=16, shuffle=False)
+        test_loader = DataLoader(test_dataset, batch_size=16, shuffle=False)
 
-    total_size = len(dataset)
-    train_size = int(0.7 * total_size)
-    val_size = int(0.15 * total_size)
-    test_size = total_size - train_size - val_size
+        return train_loader, val_loader, test_loader
 
-    train_dataset, val_dataset, test_dataset = random_split(
-        dataset,
-        [train_size, val_size, test_size],
-        generator=torch.Generator().manual_seed(42)
-    )
 
-    train_loader = DataLoader(train_dataset, batch_size=16, shuffle=True)
-    val_loader = DataLoader(val_dataset, batch_size=16, shuffle=False)
-    test_loader = DataLoader(test_dataset, batch_size=16, shuffle=False)
-
-    return train_loader, val_loader, test_loader
