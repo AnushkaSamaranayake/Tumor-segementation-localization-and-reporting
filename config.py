@@ -1,0 +1,1 @@
+PIXEL_SPACING = 0.26
