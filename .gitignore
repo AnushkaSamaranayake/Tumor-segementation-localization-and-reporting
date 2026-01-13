@@ -210,3 +210,4 @@ Data/
 model/
 Test/
 mlruns/1/models/m-5a8a2cd86e854a37ae205f3b8eb3a9a5/artifacts/data/model.pth
+mlruns/
